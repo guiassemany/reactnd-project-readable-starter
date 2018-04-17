@@ -5,21 +5,23 @@ import * as CategoriesAPI from './utils/CategoriesAPI'
 import * as PostAPI from './utils/PostsAPI'
 import * as CommentsAPI from './utils/CommentsAPI'
 
+
 class App extends Component {
+    state = {
+        categories: []
+    }
+
     componentDidMount() {
+        CategoriesAPI.getAll().then(res => {
+            this.setState({
+                categories: res
+            })
+        })
     }
 
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
-            </div>
+            <h1>Teste</h1>
         )
     }
 }
