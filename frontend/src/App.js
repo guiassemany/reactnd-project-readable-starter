@@ -4,24 +4,19 @@ import './App.css'
 import * as CategoriesAPI from './utils/CategoriesAPI'
 import * as PostAPI from './utils/PostsAPI'
 import * as CommentsAPI from './utils/CommentsAPI'
+import CategoryList from './Components/CategoryList'
+import {Route} from "react-router-dom"
+import Home from "./Components/Home"
 
 
 class App extends Component {
-    state = {
-        categories: []
-    }
-
-    componentDidMount() {
-        CategoriesAPI.getAll().then(res => {
-            this.setState({
-                categories: res
-            })
-        })
-    }
 
     render() {
         return (
-            <h1>Teste</h1>
+            <div>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/:category' render={() => (<h1>Olá</h1>)} />
+            </div>
         )
     }
 }
