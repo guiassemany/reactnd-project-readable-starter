@@ -2,7 +2,8 @@ const api = "http://localhost:3001";
 
 const headers = {
     'Accept': 'application/json',
-    'Authorization': 'any-token'
+    'Authorization': 'any-token',
+    "Content-Type": "application/json",
 }
 
 export const getAll = () => {
@@ -27,7 +28,7 @@ export const getPostDetails = (id) => {
 }
 
 export const votePost = (id, option) => {
-    return fetch(`${api}/posts/${id}`, {method: 'post', headers, body: {option}})
+    return fetch(`${api}/posts/${id}`, {method: 'post', headers, body: JSON.stringify({option})})
         .then(res => res.json());
 }
 

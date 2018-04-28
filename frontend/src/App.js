@@ -1,10 +1,5 @@
 import React, {Component} from 'react'
-import logo from './logo.svg'
 import './App.css'
-import * as CategoriesAPI from './utils/CategoriesAPI'
-import * as PostAPI from './utils/PostsAPI'
-import * as CommentsAPI from './utils/CommentsAPI'
-import CategoryList from './Components/CategoryList'
 import {Route} from "react-router-dom"
 import Home from "./Components/Home"
 

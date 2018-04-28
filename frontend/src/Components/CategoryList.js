@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import * as CategoriesAPI from "../utils/CategoriesAPI"
-import * as PostAPI from "../utils/PostsAPI"
 import CategoryCard from "./CategoryCard"
 import {Col, Row} from "reactstrap"
 import {connect} from "react-redux"
@@ -12,7 +10,7 @@ class CategoryList extends Component {
         return (
             <Row>
                 {categories && categories.map(category => (
-                    <Col xs={4}>
+                    <Col xs={4} key={category.name} >
                         <CategoryCard category={category} />
                     </Col>
                 ))}

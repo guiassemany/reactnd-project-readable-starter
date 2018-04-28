@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Button, Col, Row, Table} from "reactstrap"
-import {upvote} from "../redux/posts/action"
+import {serverUpVote} from "../redux/posts/action"
 import {connect} from "react-redux"
 
 class PostList extends Component {
@@ -25,7 +25,7 @@ class PostList extends Component {
                             </thead>
                             <tbody>
                             {posts && posts.map((post, index) => (
-                                <tr>
+                                <tr key={index}>
                                     <th scope="row">{index+1}</th>
                                     <td>{post.title}</td>
                                     <td>{post.author}</td>
@@ -60,7 +60,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         upVotePost: id => {
-            dispatch(upvote(id))
+            dispatch(serverUpVote(id))
         }
     }
 }

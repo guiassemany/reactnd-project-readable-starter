@@ -1,18 +1,8 @@
 import {LOAD_POSTS, UPVOTE_POST} from "./action"
 
 const initialState = {
-    list: [
-        {
-            id: 1,
-            title: 'teste',
-            author: 'Guilherme',
-            category: 'react',
-            voteScore: 1,
-            commentCount: 0
-        }
-    ]
+    list: []
 }
-
 
 export default function posts(state = initialState, action) {
     switch (action.type) {
@@ -28,7 +18,12 @@ export default function posts(state = initialState, action) {
                 list
             }
         case LOAD_POSTS:
-            return state
+            return {
+                ...state,
+                list: [
+                    ...action.posts
+                ]
+            }
         default:
             return state
     }

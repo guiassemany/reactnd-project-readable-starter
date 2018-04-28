@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, Row, Col
+    Card, CardBody,
+    CardTitle, Button, Row, Col
 } from 'reactstrap'
 
 function CategoryCard({category}) {
