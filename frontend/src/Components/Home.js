@@ -6,6 +6,10 @@ import * as PostAPI from "../utils/PostsAPI"
 import {Container, Row, Col} from 'reactstrap'
 import PostList from "./PostList"
 import TopBar from "./TopBar"
+import {connect} from "react-redux"
+import {loadPosts} from "../redux/posts/action"
+import {normalize} from "normalizr"
+import {postListSchema} from "../redux/schema"
 
 const styles = theme => ({
     root: {
@@ -19,22 +23,8 @@ const styles = theme => ({
 })
 
 class Home extends Component {
-    state = {
-        categories: [],
-        posts: []
-    }
-
     componentDidMount() {
-        CategoriesAPI.getAll().then(res => {
-            this.setState({
-                categories: res
-            })
-        })
-        PostAPI.getAll().then(res => {
-            this.setState({
-                posts: res
-            })
-        })
+
     }
 
     render() {
@@ -49,10 +39,10 @@ class Home extends Component {
                 <Row>
                     <Col xs={12}>
                         <h4>Categorias</h4>
-                        <CategoryList categories={this.state.categories}/>
+                        <CategoryList />
                         <hr/>
                         <h4>Posts</h4>
-                        <PostList posts={this.state.posts}/>
+                        <PostList />
                     </Col>
                 </Row>
             </Container>
@@ -62,4 +52,12 @@ class Home extends Component {
 
 Home.propTypes = {}
 
-export default Home
+const mapStateToProps = state => {
+    return {}
+}
+
+const mapDispatchToProps = dispatch => {
+    return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

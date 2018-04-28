@@ -5,8 +5,17 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {createStore} from 'redux';
+import {Provider} from "react-redux"
+import rootReducer from './redux/rootReducer'
+import * as CategoriesAPI from './utils/CategoriesAPI'
 
-ReactDOM.render(<BrowserRouter>
-    <App />
-</BrowserRouter>, document.getElementById('root'));
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+ReactDOM.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>, document.getElementById('root'));
 registerServiceWorker();

@@ -3,6 +3,7 @@ import * as CategoriesAPI from "../utils/CategoriesAPI"
 import * as PostAPI from "../utils/PostsAPI"
 import CategoryCard from "./CategoryCard"
 import {Col, Row} from "reactstrap"
+import {connect} from "react-redux"
 
 class CategoryList extends Component {
 
@@ -10,7 +11,7 @@ class CategoryList extends Component {
         const { categories } = this.props;
         return (
             <Row>
-                {categories.map(category => (
+                {categories && categories.map(category => (
                     <Col xs={4}>
                         <CategoryCard category={category} />
                     </Col>
@@ -21,4 +22,10 @@ class CategoryList extends Component {
 
 }
 
-export default CategoryList;
+const mapStateToProps = state => {
+    return {
+        categories: state.categories
+    }
+}
+
+export default connect(mapStateToProps)(CategoryList);

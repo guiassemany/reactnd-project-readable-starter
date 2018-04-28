@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Button, Col, Row, Table} from "reactstrap"
+import {upvote} from "../redux/posts/action"
+import {connect} from "react-redux"
 
 class PostList extends Component {
     render() {
-        const { posts } = this.props;
+        const { posts, upVotePost } = this.props;
         return (
             <div>
                 <Row>
@@ -22,7 +24,7 @@ class PostList extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {posts.map((post, index) => (
+                            {posts && posts.map((post, index) => (
                                 <tr>
                                     <th scope="row">{index+1}</th>
                                     <td>{post.title}</td>
@@ -31,7 +33,7 @@ class PostList extends Component {
                                     <td>{post.voteScore}</td>
                                     <td>{post.commentCount}</td>
                                     <td>
-                                        <Button size="sm" outline color="primary">UpVote</Button>
+                                        <Button size="sm" outline color="primary" onClick={() => upVotePost(post.id)}>UpVote</Button>
                                         <Button size="sm" outline color="danger">DownVote</Button>
                                     </td>
                                 </tr>
@@ -45,6 +47,22 @@ class PostList extends Component {
     }
 }
 
-PostList.propTypes = {}
+PostList.propTypes = {
+    posts: PropTypes.array.isRequired
+}
 
-export default PostList
+const mapStateToProps = state => {
+    return {
+        posts: state.posts.list
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        upVotePost: id => {
+            dispatch(upvote(id))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostList)
