@@ -1,3 +1,5 @@
+import {makeid} from "./Helpers"
+
 const api = "http://localhost:3001";
 
 const headers = {
@@ -12,14 +14,13 @@ export const getAll = () => {
 }
 
 export const create = (post) => {
-    console.log(post);
+    post.id = makeid()
+    post.timestamp = + new Date()
     return fetch(`${api}/posts`, {
         method: "POST",
         body: JSON.stringify(post),
         headers
-    }).then(res => res.json()).then(res => {
-        console.log('from post', res);
-    });
+    }).then(res => res.json());
 }
 
 export const getPostDetails = (id) => {

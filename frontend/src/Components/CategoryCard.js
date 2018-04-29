@@ -3,6 +3,7 @@ import {
     Card, CardBody,
     CardTitle, Button, Row, Col
 } from 'reactstrap'
+import {Link} from "react-router-dom"
 
 function CategoryCard({category}) {
     return (
@@ -12,7 +13,11 @@ function CategoryCard({category}) {
                     <Row>
                         <Col sm={{ size: '6', offset: 3 }} className='text-center'>
                             <CardTitle>{category.name}</CardTitle>
-                            <Button outline color='success'>Ver Posts</Button>
+                            <Button outline color='success'>
+                                <Link to={category.path}>
+                                    Ver Posts
+                                </Link>
+                            </Button>
                         </Col>
                     </Row>
                 </CardBody>

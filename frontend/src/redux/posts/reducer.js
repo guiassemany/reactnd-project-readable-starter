@@ -1,4 +1,4 @@
-import {LOAD_POSTS, VOTE_POST} from "./action"
+import {ADD_POST, LOAD_POSTS, VOTE_POST} from "./action"
 
 const initialState = {
     list: []
@@ -27,6 +27,14 @@ export default function posts(state = initialState, action) {
                 ...state,
                 list: [
                     ...action.posts
+                ]
+            }
+        case ADD_POST:
+            return {
+                ...state,
+                list: [
+                    ...state.list,
+                    action.post
                 ]
             }
         default:

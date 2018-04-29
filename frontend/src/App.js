@@ -2,7 +2,12 @@ import React, {Component} from 'react'
 import './App.css'
 import {Route} from "react-router-dom"
 import Home from "./Components/Home"
+import CategoryPage from "./Components/CategoryPage"
+import fontawesome from '@fortawesome/fontawesome'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import solid from '@fortawesome/fontawesome-free-solid'
 
+fontawesome.library.add(solid)
 
 class App extends Component {
 
@@ -10,7 +15,7 @@ class App extends Component {
         return (
             <div>
                 <Route exact path='/' component={Home} />
-                <Route exact path='/:category' render={() => (<h1>Olá</h1>)} />
+                <Route exact path='/:category' component={CategoryPage} />
             </div>
         )
     }
