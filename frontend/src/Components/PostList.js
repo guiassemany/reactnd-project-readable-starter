@@ -86,8 +86,12 @@ class PostList extends Component {
                             <FormGroup row>
                                 <Label for="category" sm={2}>Categoria</Label>
                                 <Col sm={10}>
-                                    <Input type="text" name="category" id="category" placeholder=""
-                                           onChange={(e) => this.handleChange(e)} required/>
+                                    <Input type="select" name="category" id="category" placeholder=""
+                                           onChange={(e) => this.handleChange(e)} >
+                                        <option value="react">React</option>
+                                        <option value="redux">Redux</option>
+                                        <option value="udacity">Udacity</option>
+                                    </Input>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>

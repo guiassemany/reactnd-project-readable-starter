@@ -12,6 +12,8 @@ class Post extends Component {
                 <div className="card mb-1">
                     <div className="card-body">
                         <h4 className="card-title">{post.title}</h4>
+                        <span class="badge badge-primary">{post.category}</span>
+                        <hr/>
                         <p className="card-text">{post.body}</p>
                         <hr/>
                         <Row className='text-center'>
