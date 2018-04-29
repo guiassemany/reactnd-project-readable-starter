@@ -3,6 +3,7 @@ import * as PostsAPI from '../../utils/PostsAPI'
 export const VOTE_POST = 'VOTE_POST'
 export const LOAD_POSTS = 'LOAD_POSTS'
 export const ADD_POST = 'ADD_POST'
+export const CHANGE_FILTER = 'CHANGE_FILTER'
 
 /* Async Actions */
 export function serverVote(post_id, type) {
@@ -49,5 +50,12 @@ export function addPost(post) {
     return {
         type: ADD_POST,
         post
+    }
+}
+
+export function changeFilter(field) {
+    return {
+        type: CHANGE_FILTER,
+        field
     }
 }

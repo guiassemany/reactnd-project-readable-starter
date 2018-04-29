@@ -3,7 +3,7 @@ import {
     Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row,
     Table
 } from "reactstrap"
-import {serverAddPost, serverVote} from "../redux/posts/action"
+import {changeFilter, serverAddPost, serverVote} from "../redux/posts/action"
 import {connect} from "react-redux"
 import Post from "./Post"
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
@@ -17,7 +17,12 @@ class PostList extends Component {
             title: null,
             author: null,
             body: null
-        }
+        },
+        orderedPosts: []
+    }
+
+    componentDidMount() {
+
     }
 
     handleChange(event) {
@@ -47,7 +52,9 @@ class PostList extends Component {
     }
 
     render() {
-        const {posts, votePost} = this.props
+        const {posts, votePost, changeFilter} = this.props
+        this.props.posts.sort((a,b) => a[this.props.orderBy] - b[this.props.orderBy]);
+        this.props.posts.reverse()
         return (
             <div>
                 <Row>
@@ -55,9 +62,9 @@ class PostList extends Component {
                         <Form inline className='fa-pull-left'>
                             <FormGroup>
                                 <Label for="exampleSelect">Ordenar por:</Label>
-                                <Input type="select" name="select" id="exampleSelect">
-                                    <option>Data</option>
-                                    <option>Votos</option>
+                                <Input type="select" name="orderBy" id="orderBy" onChange={(e) => changeFilter(e.target.value)}>
+                                    <option value="voteScore">Votos</option>
+                                    <option value="timestamp">Data</option>
                                 </Input>
                             </FormGroup>
                         </Form>
@@ -118,7 +125,9 @@ class PostList extends Component {
 
 const mapStateToProps = state => {
     return {
-        posts: state.posts.list
+        posts: state.posts.list,
+        orderBy: state.posts.orderBy,
+        orderByDirection: state.posts.orderByDirection
     }
 }
 
@@ -129,6 +138,9 @@ const mapDispatchToProps = dispatch => {
         },
         addPost: (post) => {
             dispatch(serverAddPost(post))
+        },
+        changeFilter: (field) => {
+            dispatch(changeFilter(field))
         }
     }
 }
