@@ -1,4 +1,4 @@
-import {LOAD_POSTS, UPVOTE_POST} from "./action"
+import {LOAD_POSTS, VOTE_POST} from "./action"
 
 const initialState = {
     list: []
@@ -6,10 +6,15 @@ const initialState = {
 
 export default function posts(state = initialState, action) {
     switch (action.type) {
-        case UPVOTE_POST:
+        case VOTE_POST:
             let list = state.list.map(post => {
                 if(post.id === action.post_id) {
-                    post.voteScore ++
+                    if(action.voteType === 'upVote') {
+                        post.voteScore ++
+                    } else {
+                        post.voteScore --
+                    }
+
                 }
                 return post
             })

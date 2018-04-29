@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Button, Col, Row, Table} from "reactstrap"
-import {serverUpVote} from "../redux/posts/action"
+import {serverVote} from "../redux/posts/action"
 import {connect} from "react-redux"
 
 class PostList extends Component {
     render() {
-        const { posts, upVotePost } = this.props;
+        const { posts, votePost } = this.props;
         return (
             <div>
                 <Row>
@@ -33,8 +33,8 @@ class PostList extends Component {
                                     <td>{post.voteScore}</td>
                                     <td>{post.commentCount}</td>
                                     <td>
-                                        <Button size="sm" outline color="primary" onClick={() => upVotePost(post.id)}>UpVote</Button>
-                                        <Button size="sm" outline color="danger">DownVote</Button>
+                                        <Button size="sm" outline color="primary" onClick={() => votePost(post.id, 'upVote')}>UpVote</Button>
+                                        <Button size="sm" outline color="danger" onClick={() => votePost(post.id, 'downVote')}>DownVote</Button>
                                     </td>
                                 </tr>
                             ))}
@@ -59,8 +59,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        upVotePost: id => {
-            dispatch(serverUpVote(id))
+        votePost: (id, type) => {
+            dispatch(serverVote(id, type))
         }
     }
 }

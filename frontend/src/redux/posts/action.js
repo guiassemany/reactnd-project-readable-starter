@@ -1,21 +1,14 @@
 import * as PostsAPI from '../../utils/PostsAPI'
 
-export const UPVOTE_POST = 'UPVOTE_POST'
+export const VOTE_POST = 'VOTE_POST'
 export const LOAD_POSTS = 'LOAD_POSTS'
 
-
-export function serverUpVote(post_id) {
+/* Async Actions */
+export function serverVote(post_id, type) {
     return dispatch => {
-        PostsAPI.votePost(post_id, 'upVote').then(res => {
-          dispatch(upVote(post_id))
+        PostsAPI.votePost(post_id, type).then(res => {
+          dispatch(vote(post_id, type))
         })
-    }
-}
-
-function upVote (post_id) {
-    return {
-        type: UPVOTE_POST,
-        post_id
     }
 }
 
@@ -24,6 +17,15 @@ export function serverLoadPosts() {
         PostsAPI.getAll().then(res => {
             dispatch(loadPosts(res))
         })
+    }
+}
+
+/* Actions */
+function vote(post_id, voteType) {
+    return {
+        type: VOTE_POST,
+        post_id,
+        voteType
     }
 }
 
