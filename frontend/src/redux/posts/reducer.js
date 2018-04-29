@@ -1,4 +1,4 @@
-import {ADD_POST, LOAD_POSTS, VOTE_POST, CHANGE_FILTER} from "./action"
+import {ADD_POST, LOAD_POSTS, VOTE_POST, CHANGE_FILTER, DELETE_POST} from "./action"
 
 const initialState = {
     list: [],
@@ -31,6 +31,14 @@ export default function posts(state = initialState, action) {
                 ]
             }
         case ADD_POST:
+            return {
+                ...state,
+                list: [
+                    ...state.list,
+                    action.post
+                ]
+            }
+        case DELETE_POST:
             return {
                 ...state,
                 list: [
