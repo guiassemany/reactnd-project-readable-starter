@@ -15,17 +15,23 @@ class Post extends Component {
                         <p className="card-text">{post.body}</p>
                         <hr/>
                         <Row className='text-center'>
-                            <Col xs={4}>
+                            <Col xs={3} className={post.voteScore >= 0 ? 'text-success' : 'text-danger'}>
                                 <FontAwesomeIcon icon="thumbs-up"/>
                                 <p>{post.voteScore}</p>
                             </Col>
-                            <Col xs={4}>
+                            <Col xs={3} className='text-primary'>
                                 <FontAwesomeIcon icon="comments"/>
                                 <p>{post.commentCount}</p>
                             </Col>
-                            <Col xs={4}>
-                                <FontAwesomeIcon icon="edit"/>
-                                <p>Editar Post</p>
+                            <Col xs={3} className='text-info'>
+                                <Button outline color='info'>
+                                    <FontAwesomeIcon icon="edit"/>
+                                </Button>
+                            </Col>
+                            <Col xs={3} className='text-danger'>
+                                <Button outline color='danger'>
+                                    <FontAwesomeIcon icon="trash"/>
+                                </Button>
                             </Col>
                         </Row>
                         <hr/>
