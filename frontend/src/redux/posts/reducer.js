@@ -1,8 +1,9 @@
-import {ADD_POST, LOAD_POSTS, VOTE_POST, CHANGE_FILTER, DELETE_POST} from "./action"
+import {ADD_POST, LOAD_POSTS, VOTE_POST, CHANGE_FILTER, DELETE_POST, CHANGE_CURRENT_POST} from "./action"
 
 const initialState = {
     list: [],
-    orderBy: 'voteScore'
+    orderBy: 'voteScore',
+    currentPost: {}
 }
 
 export default function posts(state = initialState, action) {
@@ -51,6 +52,11 @@ export default function posts(state = initialState, action) {
             return {
                 ...state,
                 orderBy: action.field
+            }
+        case CHANGE_CURRENT_POST:
+            return {
+                ...state,
+                currentPost: action.post
             }
         default:
             return state

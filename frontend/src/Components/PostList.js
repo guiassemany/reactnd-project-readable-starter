@@ -3,7 +3,10 @@ import {
     Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row,
     Table
 } from "reactstrap"
-import {changeFilter, serverAddPost, serverDeletePost, serverVote} from "../redux/posts/action"
+import {
+    changeCurrentPost, changeFilter, serverAddPost, serverDeletePost, serverLoadPostById,
+    serverVote
+} from "../redux/posts/action"
 import {connect} from "react-redux"
 import Post from "./Post"
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
@@ -53,7 +56,6 @@ class PostList extends Component {
 
     render() {
         let {posts, votePost, changeFilter, deletePost, category} = this.props
-        console.log(category)
         posts.sort((a,b) => a[this.props.orderBy] - b[this.props.orderBy]);
         posts.reverse()
         if(category) {

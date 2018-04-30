@@ -57,14 +57,29 @@
     margin: -2px;
     cursor: pointer;
 }
-.comment-actions li.complain {
+
+.comment-actions li.firstOpt {
     padding-right: 0.75rem;
     border-right: 1px solid #e1e5eb;
 }
-.comment-actions li.reply {
+
+.comment-actions li.secondOpt {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+    border-right: 1px solid #e1e5eb;
+}
+
+.comment-actions li.thirdOpt {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+    border-right: 1px solid #e1e5eb;
+}
+
+.comment-actions li.fourthOpt {
     padding-left: 0.75rem;
     padding-right: 0.125rem;
 }
+
 .comment-actions li:hover {
     color: #0095ff;
 }

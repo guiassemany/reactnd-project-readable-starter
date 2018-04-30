@@ -14,9 +14,9 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/:category' component={CategoryPage} />
-                    <Route exact path='/:category/:post_id' component={PostPage} />
+                <Route exact path='/' component={Home}/>
+                <Route exact path='/:category' component={CategoryPage}/>
+                <Route exact path='/:category/:post_id' component={PostPage}/>
             </div>
         )
     }

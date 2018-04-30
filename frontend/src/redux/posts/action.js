@@ -5,6 +5,8 @@ export const LOAD_POSTS = 'LOAD_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const CHANGE_FILTER = 'CHANGE_FILTER'
+export const CHANGE_CURRENT_POST = 'CHANGE_CURRENT_POST'
+
 
 /* Async Actions */
 export function serverVote(post_id, type) {
@@ -36,6 +38,14 @@ export function serverDeletePost(post_id) {
         PostsAPI.deletePost(post_id).then(res => {
             console.log(res)
             dispatch(deletePost(post_id))
+        })
+    }
+}
+
+export function serverLoadPostById(post_id) {
+    return dispatch => {
+        PostsAPI.getPostDetails(post_id).then(res => {
+            dispatch(changeCurrentPost(res))
         })
     }
 }
@@ -74,5 +84,12 @@ export function deletePost(post_id) {
     return {
         type: DELETE_POST,
         post_id
+    }
+}
+
+export function changeCurrentPost(post) {
+    return {
+        type: CHANGE_CURRENT_POST,
+        post
     }
 }
