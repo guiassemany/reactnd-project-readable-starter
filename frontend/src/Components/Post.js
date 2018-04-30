@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import {Col, Row, Button, ButtonGroup} from "reactstrap"
 import {formatDate} from "../utils/Helpers"
-import {serverDeletePost} from "../redux/posts/action"
-import {connect} from "react-redux"
 
 class Post extends Component {
     render() {
@@ -14,7 +12,7 @@ class Post extends Component {
                 <div className="card mb-1">
                     <div className="card-body">
                         <h4 className="card-title">{post.title}</h4>
-                        <span class="badge badge-primary">{post.category}</span>
+                        <span className="badge badge-primary">{post.category}</span>
                         <hr/>
                         <p className="card-text">{post.body}</p>
                         <hr/>
@@ -58,15 +56,4 @@ class Post extends Component {
 
 Post.propTypes = {}
 
-const mapStateToProps = (state) => {
-
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        deletePost: post_id => {
-            dispatch(serverDeletePost(post_id));
-        }
-    }
-}
-export default connect(null, mapDispatchToProps)(Post)
+export default Post

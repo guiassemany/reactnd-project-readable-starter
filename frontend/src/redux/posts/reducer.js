@@ -19,10 +19,14 @@ export default function posts(state = initialState, action) {
                 }
                 return post
             })
-            return {
+            console.log(list)
+
+            var state = {
                 ...state,
                 list
             }
+            console.log(state)
+            return state
         case LOAD_POSTS:
             return {
                 ...state,

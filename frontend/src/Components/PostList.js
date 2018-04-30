@@ -3,7 +3,7 @@ import {
     Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row,
     Table
 } from "reactstrap"
-import {changeFilter, serverAddPost, serverVote} from "../redux/posts/action"
+import {changeFilter, serverAddPost, serverDeletePost, serverVote} from "../redux/posts/action"
 import {connect} from "react-redux"
 import Post from "./Post"
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
@@ -52,9 +52,13 @@ class PostList extends Component {
     }
 
     render() {
-        const {posts, votePost, changeFilter} = this.props
-        this.props.posts.sort((a,b) => a[this.props.orderBy] - b[this.props.orderBy]);
-        this.props.posts.reverse()
+        let {posts, votePost, changeFilter, deletePost, category} = this.props
+        console.log(category)
+        posts.sort((a,b) => a[this.props.orderBy] - b[this.props.orderBy]);
+        posts.reverse()
+        if(category) {
+            posts = posts.filter(post => post.category === category)
+        }
         return (
             <div>
                 <Row>
@@ -75,7 +79,7 @@ class PostList extends Component {
                     </Col>
                     {posts && posts.map((post, index) => (
                         <Col xs={12} md={6} key={index}>
-                            <Post post={post} votePost={votePost}/>
+                            <Post post={post} votePost={votePost} deletePost={deletePost}/>
                         </Col>
                     ))}
                 </Row>
@@ -145,6 +149,9 @@ const mapDispatchToProps = dispatch => {
         },
         changeFilter: (field) => {
             dispatch(changeFilter(field))
+        },
+        deletePost: post_id => {
+            dispatch(serverDeletePost(post_id));
         }
     }
 }
