@@ -10,7 +10,7 @@ class CategoryList extends Component {
         return (
             <Row>
                 {categories && categories.map(category => (
-                    <Col xs={4} key={category.name} >
+                    <Col xs={12} md={4} key={category.name} >
                         <CategoryCard category={category} />
                     </Col>
                 ))}

@@ -8,7 +8,7 @@ import {Link} from "react-router-dom"
 class CategoryPage extends Component {
     render() {
         return (
-            <Container>
+            <Container fluid={true}>
                 <TopBar />
                 <Row>
                     <Col xs={12}>

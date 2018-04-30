@@ -12,7 +12,7 @@ class Home extends Component {
 
     render() {
         return (
-            <Container>
+            <Container fluid={true}>
                 <Row>
                     <Col xs={12}>
                         <TopBar />
