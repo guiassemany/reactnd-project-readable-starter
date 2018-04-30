@@ -15,7 +15,7 @@ export function formatDate(timestamp) {
     var months_arr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
     // Convert timestamp to milliseconds
-    var date = new Date(unixtimestamp * 1000)
+    var date = new Date(unixtimestamp)
 
     // Year
     var year = date.getFullYear()
