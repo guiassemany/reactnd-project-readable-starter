@@ -47,3 +47,10 @@ export const getCommentsForPost = (id) => {
     return fetch(`${api}/posts/${id}/comments`, {headers})
         .then(res => res.json());
 }
+
+export const createComment = (comment) => {
+    comment.id = makeid()
+    comment.timestamp = + new Date()
+    return fetch(`${api}/comments`, {method: "POST", headers, body: JSON.stringify(comment)})
+        .then(res => res.json());
+}

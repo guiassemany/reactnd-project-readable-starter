@@ -1,22 +1,42 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Card, Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle, Col, Container, Row} from "reactstrap"
+import {
+    Card, Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle, Col, Container, Row,
+    Input, Form, FormGroup, Label
+} from "reactstrap"
 import TopBar from "./TopBar"
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import {serverLoadComments} from "../redux/comments/action"
+import {serverAddComment, serverLoadComments} from "../redux/comments/action"
 import {connect} from "react-redux"
 import {serverLoadPostById} from "../redux/posts/action"
 import {formatDate} from "../utils/Helpers"
 
 class PostPage extends Component {
+
+    state = {
+        newComment: {
+            author: null,
+            body: null,
+            parentId: this.props.match.params.post_id
+        }
+    }
+
     componentDidMount() {
         this.props.loadPostDetails(this.props.match.params.post_id)
         this.props.loadComments(this.props.match.params.post_id)
     }
 
+    handleChange(event) {
+        this.setState({
+            newComment: {
+                ...this.state.newComment,
+                [event.target.name]: event.target.value
+            }
+        })
+    }
+
     render() {
-        const {post, comments} = this.props
-        console.log(comments)
+        const {post, comments, addComment} = this.props
         return (
             <Container fluid={true}>
                 <TopBar/>
@@ -45,7 +65,7 @@ class PostPage extends Component {
                         <Card>
                             <CardBody>
                                 <Row className='text-center'>
-                                    <Col xs={6} >
+                                    <Col xs={6}>
                                         <FontAwesomeIcon icon="thumbs-up"/>
                                         <p>{post.voteScore}</p>
                                         Votos
@@ -93,10 +113,31 @@ class PostPage extends Component {
                                          style={{backgroundImage: "url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"}}></div>
                                 </div>
                                 <div className="comment-block">
-                                    <form action="">
-                                        <textarea name="" id="" cols="30" rows="3"
-                                                  placeholder="Add comment..."></textarea>
-                                    </form>
+                                    <Form>
+                                        <FormGroup row>
+                                            <Label for="author" sm={2}>Autor</Label>
+                                            <Col sm={10}>
+                                                <Input type="text" name="author" id="author" placeholder=""
+                                                       onChange={(e) => this.handleChange(e)}>
+                                                </Input>
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Label for="author" sm={2}>Comentário</Label>
+                                            <Col sm={10}>
+                                                <Input type="textarea" name="body" id="body" placeholder=""
+                                                       onChange={(e) => this.handleChange(e)}>
+                                                </Input>
+                                            </Col>
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <Col sm={12}>
+                                                <Button outline block color='primary' onClick={() => addComment(this.state.newComment)} >
+                                                    Adicionar Comentário
+                                                </Button>
+                                            </Col>
+                                        </FormGroup>
+                                    </Form>
                                 </div>
                             </div>
                             {comments && comments.map(comment => (
@@ -149,6 +190,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         loadComments: (post_id) => {
             dispatch(serverLoadComments(post_id))
+        },
+        addComment: (comment) => {
+            dispatch(serverAddComment(comment))
         }
     }
 }
