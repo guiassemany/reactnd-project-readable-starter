@@ -31,8 +31,8 @@ class PostPage extends Component {
                         <Card>
                             <CardBody>
                                 <CardSubtitle>
-                                    Autor: <span classNameName="badge badge-primary">{post.author}</span> /
-                                    Categoria: <span classNameName="badge badge-primary">{post.category}</span>
+                                    Autor: <span className="badge badge-primary">{post.author}</span> /
+                                    Categoria: <span className="badge badge-primary">{post.category}</span>
                                 </CardSubtitle>
                                 <hr/>
                                 <CardText>
@@ -66,14 +66,14 @@ class PostPage extends Component {
                                     </Col>
                                 </Row>
                                 <hr/>
-                                <Row classNameName='text-center'>
-                                    <Col xs={6} classNameName='text-primary'>
+                                <Row className='text-center'>
+                                    <Col xs={6} className='text-primary'>
                                         <Button block={true} outline color='info'>
                                             <FontAwesomeIcon icon="edit"/>
                                             <p>Editar</p>
                                         </Button>
                                     </Col>
-                                    <Col xs={6} classNameName='text-primary'>
+                                    <Col xs={6} className='text-primary'>
                                         <Button block={true} outline color='danger'>
                                             <FontAwesomeIcon icon="trash"/>
                                             <p>Deletar</p>
