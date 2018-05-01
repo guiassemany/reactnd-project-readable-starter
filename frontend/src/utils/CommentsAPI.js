@@ -2,7 +2,8 @@ const api = "http://localhost:3001";
 
 const headers = {
     'Accept': 'application/json',
-    'Authorization': 'any-token'
+    'Authorization': 'any-token',
+    'Content-Type': 'application/json'
 }
 
 export const create = (comment) => {
@@ -16,7 +17,7 @@ export const getDetails = (id) => {
 }
 
 export const voteComment = (id, option) => {
-    return fetch(`${api}/comments/${id}`, {method: 'post', headers, body: {option}})
+    return fetch(`${api}/comments/${id}`, {method: 'post', headers, body: JSON.stringify({option})})
         .then(res => res.json());
 }
 

@@ -1,8 +1,10 @@
 import * as PostsAPI from '../../utils/PostsAPI'
+import * as CommentsAPI from '../../utils/CommentsAPI'
 
 export const LOAD_COMMENTS = 'LOAD_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const VOTE_COMMENT = 'VOTE_COMMENT'
 
 /*Async*/
 export function serverLoadComments (post_id) {
@@ -27,6 +29,14 @@ export function serverDeleteComment(comment_id) {
     }
 }
 
+export function serverVoteComment(comment_id, voteType) {
+    return dispatch => {
+        CommentsAPI.voteComment(comment_id, voteType).then(res => {
+            console.log(res)
+            dispatch(voteComment(comment_id, voteType));
+        })
+    }
+}
 
 /*Sync*/
 
@@ -48,5 +58,13 @@ export function deleteComment(comment) {
     return {
         type: DELETE_COMMENT,
         comment
+    }
+}
+
+export function voteComment(comment_id, voteType) {
+    return {
+        type: VOTE_COMMENT,
+        comment_id,
+        voteType
     }
 }

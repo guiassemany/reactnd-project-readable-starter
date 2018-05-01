@@ -36,7 +36,6 @@ export function serverAddPost(post) {
 export function serverDeletePost(post_id) {
     return dispatch => {
         PostsAPI.deletePost(post_id).then(res => {
-            console.log(res)
             dispatch(deletePost(post_id))
         })
     }

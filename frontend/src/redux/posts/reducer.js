@@ -19,7 +19,6 @@ export default function posts(state = initialState, action) {
                     } else {
                         post.voteScore--
                     }
-
                 }
                 return post
             })

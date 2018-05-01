@@ -4,6 +4,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import {Col, Row, Button, ButtonGroup} from "reactstrap"
 import {formatDate} from "../utils/Helpers"
 import {Link} from "react-router-dom"
+import PostVote from "./PostVote"
 
 class Post extends Component {
     render() {
@@ -40,12 +41,7 @@ class Post extends Component {
                             </Col>
                         </Row>
                         <hr/>
-                        <ButtonGroup>
-                            <Button size="sm" outline color="primary"
-                                    onClick={() => votePost(post.id, 'upVote')}>UpVote</Button>
-                            <Button size="sm" outline color="danger"
-                                    onClick={() => votePost(post.id, 'downVote')}>DownVote</Button>
-                        </ButtonGroup>
+                        <PostVote post_id={post.id}/>
                     </div>
                     <div className="card-footer text-muted">
                         Publicado em {formatDate(post.timestamp)} por

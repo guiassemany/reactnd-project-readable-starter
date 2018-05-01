@@ -10,33 +10,19 @@ import {serverAddComment, serverDeleteComment, serverLoadComments} from "../redu
 import {connect} from "react-redux"
 import {serverLoadPostById} from "../redux/posts/action"
 import {formatDate} from "../utils/Helpers"
+import CommentVote from "./CommentVote"
+import CommentCard from "./CommentCard"
+import CommentList from "./CommentList"
+import PostVote from "./PostVote"
 
 class PostPage extends Component {
 
-    state = {
-        newComment: {
-            author: null,
-            body: null,
-            parentId: this.props.match.params.post_id
-        }
-    }
-
     componentDidMount() {
         this.props.loadPostDetails(this.props.match.params.post_id)
-        this.props.loadComments(this.props.match.params.post_id)
-    }
-
-    handleChange(event) {
-        this.setState({
-            newComment: {
-                ...this.state.newComment,
-                [event.target.name]: event.target.value
-            }
-        })
     }
 
     render() {
-        const {post, comments, addComment, deleteComment} = this.props
+        const {post} = this.props
         return (
             <Container fluid={true}>
                 <TopBar/>
@@ -79,10 +65,7 @@ class PostPage extends Component {
                                 <hr/>
                                 <Row>
                                     <Col xs={12} className='text-center'>
-                                        <ButtonGroup>
-                                            <Button outline color="primary">UpVote</Button>
-                                            <Button outline color="danger">DownVote</Button>
-                                        </ButtonGroup>
+                                        <PostVote post_id={post.id}/>
                                     </Col>
                                 </Row>
                                 <hr/>
@@ -106,67 +89,9 @@ class PostPage extends Component {
                 </Row>
                 <Row>
                     <Col xs={12} md={8}>
-                        <div className="comments">
-                            <div className="comment-wrap">
-                                <div className="photo">
-                                    <div className="avatar"
-                                         style={{backgroundImage: "url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"}}></div>
-                                </div>
-                                <div className="comment-block">
-                                    <Form>
-                                        <FormGroup row>
-                                            <Label for="author" sm={2}>Autor</Label>
-                                            <Col sm={10}>
-                                                <Input type="text" name="author" id="author" placeholder=""
-                                                       onChange={(e) => this.handleChange(e)}>
-                                                </Input>
-                                            </Col>
-                                        </FormGroup>
-                                        <FormGroup row>
-                                            <Label for="author" sm={2}>Comentário</Label>
-                                            <Col sm={10}>
-                                                <Input type="textarea" name="body" id="body" placeholder=""
-                                                       onChange={(e) => this.handleChange(e)}>
-                                                </Input>
-                                            </Col>
-                                        </FormGroup>
-                                        <FormGroup row>
-                                            <Col sm={12}>
-                                                <Button outline block color='primary' onClick={() => addComment(this.state.newComment)} >
-                                                    Adicionar Comentário
-                                                </Button>
-                                            </Col>
-                                        </FormGroup>
-                                    </Form>
-                                </div>
-                            </div>
-                            {comments && comments.map(comment => (
-                                <div className="comment-wrap">
-                                    <div className="photo">
-                                        <div className="avatar"
-                                             style={{backgroundImage: "url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"}}></div>
-                                    </div>
-                                    <div className="comment-block">
-                                        <p className="comment-text">{comment.author}</p>
-                                        <p className="comment-text">{comment.body}</p>
-                                        <div className="bottom-comment">
-                                            <div className="comment-date">{formatDate(comment.timestamp)}</div>
-                                            <ul className="comment-actions">
-                                                <li className="firstOpt">
-                                                    <ButtonGroup>
-                                                        <Button size="sm" outline color="primary">UpVote</Button>
-                                                        <Button size="sm" outline color="danger">DownVote</Button>
-                                                    </ButtonGroup>
-                                                </li>
-                                                <li className="secondOpt">Responder</li>
-                                                <li className="thirdOpt">Editar</li>
-                                                <li className="fourthOpt" onClick={() => deleteComment(comment)}>Deletar</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        {post.id && (
+                            <CommentList post_id={post.id} />
+                        )}
                     </Col>
                 </Row>
             </Container>
@@ -178,8 +103,7 @@ PostPage.propTypes = {}
 
 const mapStateToProps = (state) => {
     return {
-        post: state.posts.currentPost,
-        comments: state.comments.list
+        post: state.posts.currentPost
     }
 }
 
@@ -187,15 +111,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadPostDetails: post_id => {
             dispatch(serverLoadPostById(post_id))
-        },
-        loadComments: (post_id) => {
-            dispatch(serverLoadComments(post_id))
-        },
-        addComment: (comment) => {
-            dispatch(serverAddComment(comment))
-        },
-        deleteComment: (comment_id) => {
-            dispatch(serverDeleteComment(comment_id))
         }
     }
 }
