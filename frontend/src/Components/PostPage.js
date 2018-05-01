@@ -17,8 +17,7 @@ class PostPage extends Component {
     }
 
     render() {
-        const {post, post2} = this.props
-        console.log(post2)
+        const {post} = this.props
         return (
             <Container fluid={true}>
                 <TopBar/>
@@ -97,7 +96,7 @@ class PostPage extends Component {
 
 PostPage.propTypes = {}
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
         post: state.posts.currentPost
     }
