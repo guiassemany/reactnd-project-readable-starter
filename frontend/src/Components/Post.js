@@ -1,20 +1,20 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import {Col, Row, Button, ButtonGroup} from "reactstrap"
+import {Col, Row, Button} from "reactstrap"
 import {formatDate} from "../utils/Helpers"
 import {Link} from "react-router-dom"
 import PostVote from "./PostVote"
 
 class Post extends Component {
     render() {
-        const {post, votePost, deletePost, changeCurrentPost} = this.props
+        const {post, deletePost} = this.props
         return (
             <div>
                 <div className="card mb-1">
                     <div className="card-body">
                         <h4 className="card-title">
-                            <Link onClick={() => changeCurrentPost(post)} to={`/${post.category}/${post.id}`}>{post.title}</Link>
+                            <Link to={`/${post.category}/${post.id}`}>{post.title}</Link>
                         </h4>
                         <span className="badge badge-primary">{post.category}</span>
                         <hr/>
@@ -45,7 +45,7 @@ class Post extends Component {
                     </div>
                     <div className="card-footer text-muted">
                         Publicado em {formatDate(post.timestamp)} por
-                        <a href="#"> {post.author}</a>
+                        <span> {post.author}</span>
                     </div>
                 </div>
             </div>

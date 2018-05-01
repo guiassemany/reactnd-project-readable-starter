@@ -1,15 +1,10 @@
 import React, {Component} from 'react'
 import {
-    Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row,
-    Table
+    Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row
 } from "reactstrap"
-import {
-    changeCurrentPost, changeFilter, serverAddPost, serverDeletePost, serverLoadPostById,
-    serverVote
-} from "../redux/posts/action"
+import {changeFilter, serverAddPost, serverDeletePost, serverVote} from "../redux/posts/action"
 import {connect} from "react-redux"
 import Post from "./Post"
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
 class PostList extends Component {
 

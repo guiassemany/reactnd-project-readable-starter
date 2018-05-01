@@ -12,6 +12,7 @@ const initialState = {
 export default function posts(state = initialState, action) {
     switch (action.type) {
         case VOTE_POST:
+            let changedPost = null;
             let list = state.list.map(post => {
                 if (post.id === action.post_id) {
                     if (action.voteType === 'upVote') {
@@ -19,14 +20,18 @@ export default function posts(state = initialState, action) {
                     } else {
                         post.voteScore--
                     }
+                    changedPost = post;
                 }
                 return post
             })
-            var state = {
+            return {
                 ...state,
-                list
+                list,
+                currentPost: {
+                    ...state.currentPost,
+                    voteScore: changedPost.voteScore
+                }
             }
-            return state
         case LOAD_POSTS:
             return {
                 ...state,

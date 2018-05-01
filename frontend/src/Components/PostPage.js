@@ -1,17 +1,12 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {
-    Card, Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle, Col, Container, Row,
-    Input, Form, FormGroup, Label
+    Card, Button, CardBody, CardSubtitle, CardText, Col, Container, Row,
 } from "reactstrap"
 import TopBar from "./TopBar"
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import {serverAddComment, serverDeleteComment, serverLoadComments} from "../redux/comments/action"
 import {connect} from "react-redux"
 import {serverLoadPostById} from "../redux/posts/action"
-import {formatDate} from "../utils/Helpers"
-import CommentVote from "./CommentVote"
-import CommentCard from "./CommentCard"
 import CommentList from "./CommentList"
 import PostVote from "./PostVote"
 
@@ -22,7 +17,8 @@ class PostPage extends Component {
     }
 
     render() {
-        const {post} = this.props
+        const {post, post2} = this.props
+        console.log(post2)
         return (
             <Container fluid={true}>
                 <TopBar/>
@@ -101,7 +97,7 @@ class PostPage extends Component {
 
 PostPage.propTypes = {}
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         post: state.posts.currentPost
     }

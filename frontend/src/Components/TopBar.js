@@ -3,7 +3,6 @@ import {
     Navbar,
     NavbarToggler,
     NavbarBrand} from 'reactstrap';
-import {Link} from "react-router-dom"
 
 export default class TopBar extends Component {
     constructor(props) {
@@ -23,9 +22,9 @@ export default class TopBar extends Component {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                    <Link to='/'>
-                        <NavbarBrand>Readable</NavbarBrand>
-                    </Link>
+                        <NavbarBrand>
+                            Readable
+                        </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                 </Navbar>
             </div>
