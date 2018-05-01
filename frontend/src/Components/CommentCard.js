@@ -8,10 +8,10 @@ const CommentCard = (props) => {
         <div className="comment-wrap">
             <div className="photo">
                 <div className="avatar"
-                     style={{backgroundImage: "url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"}}></div>
+                     style={{backgroundImage: "url('https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png')"}}></div>
             </div>
             <div className="comment-block">
-                <span className='fa-pull-right badge badge-primary'>{comment.voteScore}</span>
+                <span className='fa-pull-right badge badge-primary'>Votos: {comment.voteScore}</span>
                 <p className="comment-text">{comment.author}</p>
                 <p className="comment-text">{comment.body}</p>
                 <div className="bottom-comment">

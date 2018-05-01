@@ -34,7 +34,7 @@ class CommentList extends Component {
                 <div className="comment-wrap">
                     <div className="photo">
                         <div className="avatar"
-                             style={{backgroundImage: "url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"}}></div>
+                             style={{backgroundImage: "url('https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png')"}}></div>
                     </div>
                     <div className="comment-block">
                         <Form>
