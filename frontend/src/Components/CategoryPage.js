@@ -21,12 +21,12 @@ class CategoryPage extends Component {
                         <PostList category={this.props.match.params.category} />
                     </Col>
                     <Col xs={12} md={4}>
-                        <div class="card my-4">
-                            <h5 class="card-header">Categories</h5>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <ul class="list-unstyled mb-0">
+                        <div className="card my-4">
+                            <h5 className="card-header">Categories</h5>
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-lg-6">
+                                        <ul className="list-unstyled mb-0">
                                             <li>
                                                 <Link to="/react">React</Link>
                                             </li>
