@@ -5,16 +5,17 @@ import {
 import {changeFilter, serverAddPost, serverDeletePost, serverVote} from "../redux/posts/action"
 import {connect} from "react-redux"
 import Post from "./Post"
+import Swal from 'sweetalert2'
 
 class PostList extends Component {
 
     state = {
         modal: false,
         newPost: {
-            category: null,
-            title: null,
-            author: null,
-            body: null
+            category: 'react',
+            title: '',
+            author: '',
+            body: ''
         },
         orderedPosts: []
     }
@@ -37,13 +38,17 @@ class PostList extends Component {
     }
 
     addPost() {
+        if(!this.state.newPost.body || !this.state.newPost.author || !this.state.newPost.category || !this.state.newPost.title) {
+            Swal('Atenção', 'Preencha todos os campos do formulário!', 'error')
+            return
+        }
         this.props.addPost(this.state.newPost)
         this.setState({
             newPost: {
-                category: null,
-                title: null,
-                author: null,
-                body: null
+                category: 'react',
+                title: '',
+                author: '',
+                body: ''
             }
         })
         this.toggle()
@@ -88,6 +93,7 @@ class PostList extends Component {
                                 <Label for="category" sm={2}>Categoria</Label>
                                 <Col sm={10}>
                                     <Input type="select" name="category" id="category" placeholder=""
+                                           value={this.state.newPost.category}
                                            onChange={(e) => this.handleChange(e)} >
                                         <option value="react">React</option>
                                         <option value="redux">Redux</option>
@@ -99,6 +105,7 @@ class PostList extends Component {
                                 <Label for="title" sm={2}>Título</Label>
                                 <Col sm={10}>
                                     <Input type="text" name="title" id="title" placeholder=""
+                                           value={this.state.newPost.title}
                                            onChange={(e) => this.handleChange(e)}/>
                                 </Col>
                             </FormGroup>
@@ -106,6 +113,7 @@ class PostList extends Component {
                                 <Label for="author" sm={2}>Autor</Label>
                                 <Col sm={10}>
                                     <Input type="text" name="author" id="author" placeholder=""
+                                           value={this.state.newPost.author}
                                            onChange={(e) => this.handleChange(e)}/>
                                 </Col>
                             </FormGroup>
@@ -113,6 +121,7 @@ class PostList extends Component {
                                 <Label for="body" sm={2}>Texto</Label>
                                 <Col sm={10}>
                                     <Input type="text" name="body" id="body" placeholder=""
+                                           value={this.state.newPost.body}
                                            onChange={(e) => this.handleChange(e)}/>
                                 </Col>
                             </FormGroup>

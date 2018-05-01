@@ -3,13 +3,14 @@ import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap"
 import CommentCard from "./CommentCard"
 import {connect} from "react-redux"
 import {serverAddComment, serverDeleteComment, serverLoadComments} from "../redux/comments/action"
+import Swal from "sweetalert2"
 
 class CommentList extends Component {
 
     state = {
         newComment: {
-            author: null,
-            body: null,
+            author: '',
+            body: '',
             parentId: this.props.post_id
         }
     }
@@ -27,8 +28,24 @@ class CommentList extends Component {
         })
     }
 
+    localAddComment () {
+        if(!this.state.newComment.body || !this.state.newComment.author) {
+            Swal('Atenção', 'Preencha os campos para comentar!', 'error')
+            return
+        }
+        this.props.addComment(this.state.newComment)
+        this.setState({
+            newComment: {
+                author: '',
+                body: '',
+                parentId: this.props.post_id
+            }
+        })
+        Swal('Sucesso', 'Obrigado pelo comentário!', 'success')
+    }
+
     render() {
-        const {comments, addComment, deleteComment} = this.props
+        const {comments, deleteComment} = this.props
         return (
             <div className="comments">
                 <div className="comment-wrap">
@@ -41,7 +58,7 @@ class CommentList extends Component {
                             <FormGroup row>
                                 <Label for="author" sm={2}>Autor</Label>
                                 <Col sm={10}>
-                                    <Input type="text" name="author" id="author" placeholder=""
+                                    <Input type="text" name="author" id="author" placeholder="" value={this.state.newComment.author}
                                            onChange={(e) => this.handleChange(e)}>
                                     </Input>
                                 </Col>
@@ -49,7 +66,7 @@ class CommentList extends Component {
                             <FormGroup row>
                                 <Label for="author" sm={2}>Comentário</Label>
                                 <Col sm={10}>
-                                    <Input type="textarea" name="body" id="body" placeholder=""
+                                    <Input type="textarea" name="body" id="body" placeholder="" value={this.state.newComment.body}
                                            onChange={(e) => this.handleChange(e)}>
                                     </Input>
                                 </Col>
@@ -57,7 +74,7 @@ class CommentList extends Component {
                             <FormGroup row>
                                 <Col sm={12}>
                                     <Button outline block color='primary'
-                                            onClick={() => addComment(this.state.newComment)}>
+                                            onClick={() => this.localAddComment()}>
                                         Adicionar Comentário
                                     </Button>
                                 </Col>
