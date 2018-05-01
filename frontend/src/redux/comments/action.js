@@ -32,7 +32,6 @@ export function serverDeleteComment(comment_id) {
 export function serverVoteComment(comment_id, voteType) {
     return dispatch => {
         CommentsAPI.voteComment(comment_id, voteType).then(res => {
-            console.log(res)
             dispatch(voteComment(comment_id, voteType));
         })
     }
