@@ -54,3 +54,8 @@ export const createComment = (comment) => {
     return fetch(`${api}/comments`, {method: "POST", headers, body: JSON.stringify(comment)})
         .then(res => res.json());
 }
+
+export const deleteComment = (comment) => {
+    return fetch(`${api}/comments/${comment.id}`, {method: 'delete', headers})
+        .then(res => res.json());
+}

@@ -6,7 +6,7 @@ import {
 } from "reactstrap"
 import TopBar from "./TopBar"
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import {serverAddComment, serverLoadComments} from "../redux/comments/action"
+import {serverAddComment, serverDeleteComment, serverLoadComments} from "../redux/comments/action"
 import {connect} from "react-redux"
 import {serverLoadPostById} from "../redux/posts/action"
 import {formatDate} from "../utils/Helpers"
@@ -36,7 +36,7 @@ class PostPage extends Component {
     }
 
     render() {
-        const {post, comments, addComment} = this.props
+        const {post, comments, addComment, deleteComment} = this.props
         return (
             <Container fluid={true}>
                 <TopBar/>
@@ -160,7 +160,7 @@ class PostPage extends Component {
                                                 </li>
                                                 <li className="secondOpt">Responder</li>
                                                 <li className="thirdOpt">Editar</li>
-                                                <li className="fourthOpt">Deletar</li>
+                                                <li className="fourthOpt" onClick={() => deleteComment(comment)}>Deletar</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -193,6 +193,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         addComment: (comment) => {
             dispatch(serverAddComment(comment))
+        },
+        deleteComment: (comment_id) => {
+            dispatch(serverDeleteComment(comment_id))
         }
     }
 }

@@ -1,4 +1,7 @@
-import {ADD_POST, LOAD_POSTS, VOTE_POST, CHANGE_FILTER, DELETE_POST, CHANGE_CURRENT_POST} from "./action"
+import {
+    ADD_POST, LOAD_POSTS, VOTE_POST, CHANGE_FILTER, DELETE_POST, CHANGE_CURRENT_POST
+} from "./action"
+import {ADD_COMMENT, DELETE_COMMENT} from "../comments/action"
 
 const initialState = {
     list: [],
@@ -10,23 +13,20 @@ export default function posts(state = initialState, action) {
     switch (action.type) {
         case VOTE_POST:
             let list = state.list.map(post => {
-                if(post.id === action.post_id) {
-                    if(action.voteType === 'upVote') {
-                        post.voteScore ++
+                if (post.id === action.post_id) {
+                    if (action.voteType === 'upVote') {
+                        post.voteScore++
                     } else {
-                        post.voteScore --
+                        post.voteScore--
                     }
 
                 }
                 return post
             })
-            console.log(list)
-
             var state = {
                 ...state,
                 list
             }
-            console.log(state)
             return state
         case LOAD_POSTS:
             return {
@@ -57,6 +57,34 @@ export default function posts(state = initialState, action) {
             return {
                 ...state,
                 currentPost: action.post
+            }
+        case ADD_COMMENT:
+            return {
+                ...state,
+                list: state.list.map(post => {
+                    if (post.id === action.comment.parentId) {
+                        post.commentCount++
+                    }
+                    return post
+                }),
+                currentPost: {
+                    ...state.currentPost,
+                    commentCount: state.currentPost.commentCount + 1
+                }
+            }
+        case DELETE_COMMENT:
+            return {
+                ...state,
+                list: state.list.map(post => {
+                    if (post.id === action.comment.parentId) {
+                        post.commentCount--
+                    }
+                    return post
+                }),
+                currentPost: {
+                    ...state.currentPost,
+                    commentCount: state.currentPost.commentCount - 1
+                }
             }
         default:
             return state

@@ -1,4 +1,4 @@
-import {LOAD_COMMENTS, ADD_COMMENT} from './action'
+import {LOAD_COMMENTS, ADD_COMMENT, DELETE_COMMENT} from './action'
 
 const initialState = {
     list: []
@@ -16,6 +16,11 @@ export default function comments(state = initialState, action) {
                     ...state.list,
                     action.comment
                 ]
+            }
+        case DELETE_COMMENT:
+            return {
+                ...state,
+                list: state.list.filter(comment => comment.id !== action.comment.id)
             }
         default:
             return state
