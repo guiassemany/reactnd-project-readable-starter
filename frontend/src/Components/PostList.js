@@ -2,60 +2,24 @@ import React, {Component} from 'react'
 import {
     Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row
 } from "reactstrap"
-import {changeFilter, serverAddPost, serverDeletePost, serverVote} from "../redux/posts/action"
+import {addPost, changeFilter, serverAddPost, serverDeletePost, serverEditPost, serverVote} from "../redux/posts/action"
 import {connect} from "react-redux"
 import Post from "./Post"
-import Swal from 'sweetalert2'
+import PostForm from './PostForm'
 
 class PostList extends Component {
 
     state = {
         modal: false,
-        newPost: {
-            category: 'react',
-            title: '',
-            author: '',
-            body: ''
-        },
         orderedPosts: []
     }
 
-    componentDidMount() {
-
-    }
-
-    handleChange(event) {
-        this.setState({
-            newPost: {
-                ...this.state.newPost,
-                [event.target.name]: event.target.value
-            }
-        })
-    }
-
-    toggle() {
+    toggle = () => {
         this.setState({modal: !this.state.modal})
     }
 
-    addPost() {
-        if(!this.state.newPost.body || !this.state.newPost.author || !this.state.newPost.category || !this.state.newPost.title) {
-            Swal('Atenção', 'Preencha todos os campos do formulário!', 'error')
-            return
-        }
-        this.props.addPost(this.state.newPost)
-        this.setState({
-            newPost: {
-                category: 'react',
-                title: '',
-                author: '',
-                body: ''
-            }
-        })
-        this.toggle()
-    }
-
     render() {
-        let {posts, votePost, changeFilter, deletePost, category} = this.props
+        let {posts, votePost, changeFilter, deletePost, category, addPost, editPost} = this.props
         posts.sort((a,b) => a[this.props.orderBy] - b[this.props.orderBy]);
         posts.reverse()
         if(category) {
@@ -79,58 +43,20 @@ class PostList extends Component {
                             Adicionar Post
                         </Button>
                     </Col>
-                    {posts && posts.map((post, index) => (
-                        <Col xs={12} md={6} key={index}>
-                            <Post post={post} votePost={votePost} deletePost={deletePost}/>
-                        </Col>
-                    ))}
+                    {posts && posts.map((post, index) => {
+                        console.log(post)
+                     return (
+                         <Col xs={12} md={6} key={index}>
+                             <Post post={post} votePost={votePost} deletePost={deletePost} editPost={editPost}/>
+                         </Col>
+                     )
+                    })}
                 </Row>
                 <Modal isOpen={this.state.modal} toggle={() => this.toggle()} backdrop={true}>
                     <ModalHeader toggle={() => this.toggle()}>Novo Post</ModalHeader>
                     <ModalBody>
-                        <Form>
-                            <FormGroup row>
-                                <Label for="category" sm={2}>Categoria</Label>
-                                <Col sm={10}>
-                                    <Input type="select" name="category" id="category" placeholder=""
-                                           value={this.state.newPost.category}
-                                           onChange={(e) => this.handleChange(e)} >
-                                        <option value="react">React</option>
-                                        <option value="redux">Redux</option>
-                                        <option value="udacity">Udacity</option>
-                                    </Input>
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Label for="title" sm={2}>Título</Label>
-                                <Col sm={10}>
-                                    <Input type="text" name="title" id="title" placeholder=""
-                                           value={this.state.newPost.title}
-                                           onChange={(e) => this.handleChange(e)}/>
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Label for="author" sm={2}>Autor</Label>
-                                <Col sm={10}>
-                                    <Input type="text" name="author" id="author" placeholder=""
-                                           value={this.state.newPost.author}
-                                           onChange={(e) => this.handleChange(e)}/>
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Label for="body" sm={2}>Texto</Label>
-                                <Col sm={10}>
-                                    <Input type="text" name="body" id="body" placeholder=""
-                                           value={this.state.newPost.body}
-                                           onChange={(e) => this.handleChange(e)}/>
-                                </Col>
-                            </FormGroup>
-                        </Form>
+                        <PostForm addPost={addPost} addPostCb={this.toggle}/>
                     </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={() => this.toggle()}>Cancelar</Button>
-                        <Button color="primary" onClick={() => this.addPost()}>Adicionar</Button>
-                    </ModalFooter>
                 </Modal>
             </div>
         )
@@ -158,6 +84,9 @@ const mapDispatchToProps = dispatch => {
         },
         deletePost: post_id => {
             dispatch(serverDeletePost(post_id));
+        },
+        editPost: (id, type) => {
+            dispatch(serverEditPost(id, type))
         }
     }
 }

@@ -4,8 +4,15 @@ import {Col, Container, Row} from "reactstrap"
 import PostList from "./PostList"
 import TopBar from "./TopBar"
 import {Link} from "react-router-dom"
+import { withRouter } from 'react-router-dom'
 
 class CategoryPage extends Component {
+    componentDidMount() {
+        const allowedValues = ['react', 'redux', 'udacity'];
+        if(!allowedValues.includes(this.props.match.params.category)) {
+            this.props.history.push('/404')
+        }
+    }
     render() {
         return (
             <Container fluid={true}>

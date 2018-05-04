@@ -1,14 +1,30 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import {Col, Row, Button} from "reactstrap"
+import {Col, Row, Button, Modal, ModalHeader, ModalBody} from "reactstrap"
 import {formatDate} from "../utils/Helpers"
 import {Link} from "react-router-dom"
 import PostVote from "./PostVote"
+import PostForm from "./PostForm"
+import {changeFilter, serverAddPost, serverDeletePost, serverEditPost, serverVote} from "../redux/posts/action"
+import {connect} from "react-redux"
 
 class Post extends Component {
+    state = {
+        modal: false,
+        orderedPosts: []
+    }
+
+    componentDidMount() {
+
+    }
+
+    toggle = () => {
+        this.setState({modal: !this.state.modal})
+    }
+
     render() {
-        const {post, deletePost} = this.props
+        const {post, deletePost, editPost} = this.props
         return (
             <div>
                 <div className="card mb-1">
@@ -30,7 +46,7 @@ class Post extends Component {
                                 <p>{post.commentCount}</p>
                             </Col>
                             <Col xs={3} className='text-info'>
-                                <Button outline color='info'>
+                                <Button outline color='info' onClick={() => this.toggle()}>
                                     <FontAwesomeIcon icon="edit"/>
                                 </Button>
                             </Col>
@@ -48,6 +64,12 @@ class Post extends Component {
                         <span> {post.author}</span>
                     </div>
                 </div>
+                <Modal isOpen={this.state.modal} toggle={() => this.toggle()} backdrop={true}>
+                    <ModalHeader toggle={() => this.toggle()}>Novo Post</ModalHeader>
+                    <ModalBody>
+                        <PostForm addPost={editPost} addPostCb={this.toggle} post={post}/>
+                    </ModalBody>
+                </Modal>
             </div>
         )
     }

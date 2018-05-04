@@ -1,5 +1,5 @@
 import {
-    ADD_POST, LOAD_POSTS, VOTE_POST, CHANGE_FILTER, DELETE_POST, CHANGE_CURRENT_POST
+    ADD_POST, LOAD_POSTS, VOTE_POST, CHANGE_FILTER, DELETE_POST, CHANGE_CURRENT_POST, EDIT_POST
 } from "./action"
 import {ADD_COMMENT, DELETE_COMMENT} from "../comments/action"
 
@@ -46,6 +46,18 @@ export default function posts(state = initialState, action) {
                     ...state.list,
                     action.post
                 ]
+            }
+        case EDIT_POST:
+            let listEdit = state.list.map(post => {
+                if (post.id === action.post.id) {
+                    post = action.post;
+                }
+                return post;
+            })
+            return {
+                ...state,
+                list: listEdit,
+                currentPost: state.currentPost.id === action.post.id ? action.post : state.currentPost
             }
         case DELETE_POST:
             return {
