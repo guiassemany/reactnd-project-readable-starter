@@ -42,7 +42,6 @@ class PostList extends Component {
                         </Button>
                     </Col>
                     {posts && posts.map((post, index) => {
-                        console.log(post)
                      return (
                          <Col xs={12} md={6} key={index}>
                              <Post post={post} votePost={votePost} deletePost={deletePost} editPost={editPost}/>

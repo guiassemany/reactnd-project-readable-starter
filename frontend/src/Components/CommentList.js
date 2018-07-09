@@ -4,7 +4,6 @@ import CommentCard from "./CommentCard"
 import {connect} from "react-redux"
 import {serverAddComment, serverDeleteComment, serverLoadComments, serverEditComment} from "../redux/comments/action"
 import Swal from "sweetalert2"
-import {editComment} from "../utils/CommentsAPI"
 
 class CommentList extends Component {
 
