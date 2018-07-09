@@ -21,8 +21,8 @@ export const voteComment = (id, option) => {
         .then(res => res.json());
 }
 
-export const editComment = (id, comment) => {
-    return fetch(`${api}/comments/${id}`, {method: 'put', headers, body: JSON.stringify(comment)})
+export const editComment = (comment) => {
+    return fetch(`${api}/comments/${comment.id}`, {method: 'put', headers, body: JSON.stringify(comment)})
         .then(res => res.json());
 }
 

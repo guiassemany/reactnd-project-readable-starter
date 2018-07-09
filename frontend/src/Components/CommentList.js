@@ -46,7 +46,7 @@ class CommentList extends Component {
     }
 
     render() {
-        const {comments, deleteComment} = this.props
+        const {comments, deleteComment, editComment} = this.props
         return (
             <div className="comments">
                 <div className="comment-wrap">
@@ -108,8 +108,8 @@ const mapDispatchToProps = (dispatch) => {
         deleteComment: (comment_id) => {
             dispatch(serverDeleteComment(comment_id))
         },
-        editComment: (comment_id, comment) => {
-            dispatch(serverEditComment(comment_id, comment))
+        editComment: (comment) => {
+            dispatch(serverEditComment(comment))
         }
     }
 }

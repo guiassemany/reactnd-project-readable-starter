@@ -39,8 +39,8 @@ export default function comments(state = initialState, action) {
             }
         case EDIT_COMMENT:
             const newListEc = state.list.map(comment => {
-                if(comment.id === action.comment_id) {
-                    comment = action.comment;
+                if(comment.id === action.comment.id) {
+                    comment.comment = action.comment;
                 }
                 return comment;
             })

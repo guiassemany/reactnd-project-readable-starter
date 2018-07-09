@@ -39,10 +39,10 @@ export function serverVoteComment(comment_id, voteType) {
     }
 }
 
-export function serverEditComment(comment_id, comment) {
+export function serverEditComment(comment) {
     return dispatch => {
         CommentsAPI.editComment(comment).then(res => {
-            dispatch(editComments(comment));
+            dispatch(editComment(comment));
         })
     }
 }
@@ -78,7 +78,7 @@ export function voteComment(comment_id, voteType) {
     }
 }
 
-export function editComments (comment) {
+export function editComment(comment) {
     return {
         type: EDIT_COMMENT,
         comment

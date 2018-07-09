@@ -4,13 +4,13 @@ import Swal from "sweetalert2"
 
 class CommentForm extends Component {
     state = {
-        comment: {
-            author: '',
-            body: '',
-            deleted: false,
-            parentId: '',
-            voteScore: 0
-        },
+        comment: {}
+    }
+
+    componentWillMount() {
+        this.setState({
+            comment: this.props.comment
+        })
     }
 
     handleChange(event) {
@@ -39,7 +39,7 @@ class CommentForm extends Component {
                     <Label for="title" sm={2}>Comentário</Label>
                     <Col sm={10}>
                         <Input type="text" name="body" id="body" placeholder=""
-                               value={comment.body}
+                               value={this.state.comment.body}
                                onChange={(e) => this.handleChange(e)}/>
                     </Col>
                 </FormGroup>
@@ -47,7 +47,7 @@ class CommentForm extends Component {
                     <Label for="author" sm={2}>Autor</Label>
                     <Col sm={10}>
                         <Input type="text" name="author" id="author" placeholder=""
-                               value={comment.author}
+                               value={this.state.comment.author}
                                onChange={(e) => this.handleChange(e)}/>
                     </Col>
                 </FormGroup>
