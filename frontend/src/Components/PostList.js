@@ -20,8 +20,6 @@ class PostList extends Component {
 
     render() {
         let {posts, votePost, changeFilter, deletePost, category, addPost, editPost} = this.props
-        posts.sort((a,b) => a[this.props.orderBy] - b[this.props.orderBy]);
-        posts.reverse()
         if(category) {
             posts = posts.filter(post => post.category === category)
         }
@@ -53,7 +51,7 @@ class PostList extends Component {
                     })}
                 </Row>
                 <Modal isOpen={this.state.modal} toggle={() => this.toggle()} backdrop={true}>
-                    <ModalHeader toggle={() => this.toggle()}>Novo Post</ModalHeader>
+                    <ModalHeader toggle={() => this.toggle()}>Post</ModalHeader>
                     <ModalBody>
                         <PostForm addPost={addPost} addPostCb={this.toggle}/>
                     </ModalBody>
@@ -65,7 +63,7 @@ class PostList extends Component {
 
 const mapStateToProps = state => {
     return {
-        posts: state.posts.list,
+        posts: state.posts.list.sort((a,b) => a[state.posts.orderBy] - b[state.posts.orderBy]).reverse(),
         orderBy: state.posts.orderBy,
         orderByDirection: state.posts.orderByDirection
     }

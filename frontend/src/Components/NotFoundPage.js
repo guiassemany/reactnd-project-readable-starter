@@ -1,5 +1,6 @@
 import React from 'react'
 import '../404.css'
+import {Link} from "react-router-dom"
 
 function NotFoundPage(props) {
     return (
@@ -7,7 +8,9 @@ function NotFoundPage(props) {
             <div className="fzf">
                 <h1>Oops. Página não encontrada!</h1>
                 <p>A página que você estava buscando não existe mais.</p>
-                <a onClick={() => props.history.push('/')} className="btn" data-wipe="Ir para o Início">Ir para o Início</a>
+                <Link to={'/'}>
+                    <span className="btn" data-wipe="Ir para o Início">Ir para o Início</span>
+                </Link>
             </div>
         </div>
     )

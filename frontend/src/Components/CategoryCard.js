@@ -13,7 +13,7 @@ function CategoryCard({category}) {
                     <Row>
                         <Col sm={{size: '6', offset: 3}} className='text-center'>
                             <CardTitle style={{textTransform: 'capitalize'}}>{category.name}</CardTitle>
-                            <Link to={category.path}>
+                            <Link to={`/${category.path}`}>
                                 <Button outline color='success'>
                                     Ver Posts
                                 </Button>

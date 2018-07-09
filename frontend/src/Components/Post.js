@@ -65,7 +65,7 @@ class Post extends Component {
                     </div>
                 </div>
                 <Modal isOpen={this.state.modal} toggle={() => this.toggle()} backdrop={true}>
-                    <ModalHeader toggle={() => this.toggle()}>Novo Post</ModalHeader>
+                    <ModalHeader toggle={() => this.toggle()}>Alterar Post</ModalHeader>
                     <ModalBody>
                         <PostForm addPost={editPost} addPostCb={this.toggle} post={post}/>
                     </ModalBody>

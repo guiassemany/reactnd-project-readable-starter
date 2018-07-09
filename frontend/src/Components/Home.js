@@ -5,40 +5,23 @@ import PostList from "./PostList"
 import TopBar from "./TopBar"
 import {connect} from "react-redux"
 
-class Home extends Component {
-    componentDidMount() {
-
-    }
-
-    render() {
-        return (
-            <Container fluid={true}>
-                <Row>
-                    <Col xs={12}>
-                        <TopBar />
-                    </Col>
-                </Row>
+const Home = (props) => (
+    <Container fluid={true}>
+        <Row>
+            <Col xs={12}>
+                <TopBar />
+            </Col>
+        </Row>
+        <hr/>
+        <Row>
+            <Col xs={12}>
+                <h4>Categorias</h4>
+                <CategoryList />
                 <hr/>
-                <Row>
-                    <Col xs={12}>
-                        <h4>Categorias</h4>
-                        <CategoryList />
-                        <hr/>
-                        <h4>Posts</h4>
-                        <PostList />
-                    </Col>
-                </Row>
-            </Container>
-        )
-    }
-}
-
-const mapStateToProps = state => {
-    return {}
-}
-
-const mapDispatchToProps = dispatch => {
-    return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+                <h4>Posts</h4>
+                <PostList />
+            </Col>
+        </Row>
+    </Container>
+)
+export default Home;

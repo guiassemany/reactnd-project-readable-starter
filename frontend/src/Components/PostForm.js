@@ -32,7 +32,7 @@ class PostForm extends Component {
             Swal('Atenção', 'Preencha todos os campos do formulário!', 'error')
             return
         }
-        this.props.addPost(this.state.post.id, this.state.post)
+        this.state.post.id ? this.props.addPost(this.state.post.id, this.state.post) : this.props.addPost(this.state.post);
         this.setState({
             post: {
                 category: 'react',
