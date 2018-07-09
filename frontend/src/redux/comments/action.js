@@ -5,6 +5,8 @@ export const LOAD_COMMENTS = 'LOAD_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+
 
 /*Async*/
 export function serverLoadComments (post_id) {
@@ -37,6 +39,14 @@ export function serverVoteComment(comment_id, voteType) {
     }
 }
 
+export function serverEditComment(comment_id, comment) {
+    return dispatch => {
+        CommentsAPI.editComment(comment).then(res => {
+            dispatch(editComments(comment));
+        })
+    }
+}
+
 /*Sync*/
 
 export function loadComments (comments) {
@@ -65,5 +75,12 @@ export function voteComment(comment_id, voteType) {
         type: VOTE_COMMENT,
         comment_id,
         voteType
+    }
+}
+
+export function editComments (comment) {
+    return {
+        type: EDIT_COMMENT,
+        comment
     }
 }

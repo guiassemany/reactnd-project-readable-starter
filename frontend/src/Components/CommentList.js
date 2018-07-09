@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap"
 import CommentCard from "./CommentCard"
 import {connect} from "react-redux"
-import {serverAddComment, serverDeleteComment, serverLoadComments} from "../redux/comments/action"
+import {serverAddComment, serverDeleteComment, serverLoadComments, serverEditComment} from "../redux/comments/action"
 import Swal from "sweetalert2"
+import {editComment} from "../utils/CommentsAPI"
 
 class CommentList extends Component {
 
@@ -83,7 +84,7 @@ class CommentList extends Component {
                     </div>
                 </div>
                 {comments && comments.map(comment => (
-                    <CommentCard comment={comment} key={comment.id} deleteComment={deleteComment}/>
+                    <CommentCard comment={comment} key={comment.id} deleteComment={deleteComment} editComment={editComment}/>
                 ))}
             </div>
         )
@@ -106,6 +107,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         deleteComment: (comment_id) => {
             dispatch(serverDeleteComment(comment_id))
+        },
+        editComment: (comment_id, comment) => {
+            dispatch(serverEditComment(comment_id, comment))
         }
     }
 }

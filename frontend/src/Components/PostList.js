@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {
-    Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row
+    Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, Row
 } from "reactstrap"
-import {addPost, changeFilter, serverAddPost, serverDeletePost, serverEditPost, serverVote} from "../redux/posts/action"
+import {changeFilter, serverAddPost, serverDeletePost, serverEditPost, serverVote} from "../redux/posts/action"
 import {connect} from "react-redux"
 import Post from "./Post"
 import PostForm from './PostForm'

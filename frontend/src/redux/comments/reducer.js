@@ -1,4 +1,4 @@
-import {LOAD_COMMENTS, ADD_COMMENT, DELETE_COMMENT, VOTE_COMMENT} from './action'
+import {LOAD_COMMENTS, ADD_COMMENT, DELETE_COMMENT, VOTE_COMMENT, EDIT_COMMENT} from './action'
 
 const initialState = {
     list: []
@@ -36,6 +36,17 @@ export default function comments(state = initialState, action) {
             return {
                 ...state,
                 list: newList
+            }
+        case EDIT_COMMENT:
+            const newListEc = state.list.map(comment => {
+                if(comment.id === action.comment_id) {
+                    comment = action.comment;
+                }
+                return comment;
+            })
+            return {
+                ...state,
+                list: newListEc
             }
         default:
             return state

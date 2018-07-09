@@ -1,13 +1,10 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import {Col, Row, Button, Modal, ModalHeader, ModalBody} from "reactstrap"
 import {formatDate} from "../utils/Helpers"
 import {Link} from "react-router-dom"
 import PostVote from "./PostVote"
 import PostForm from "./PostForm"
-import {changeFilter, serverAddPost, serverDeletePost, serverEditPost, serverVote} from "../redux/posts/action"
-import {connect} from "react-redux"
 
 class Post extends Component {
     state = {

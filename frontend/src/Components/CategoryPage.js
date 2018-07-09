@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {Col, Container, Row} from "reactstrap"
 import PostList from "./PostList"
 import TopBar from "./TopBar"
 import {Link} from "react-router-dom"
-import { withRouter } from 'react-router-dom'
 
 class CategoryPage extends Component {
     componentDidMount() {

@@ -10,7 +10,6 @@ import {serverDeletePost, serverEditPost, serverLoadPostById} from "../redux/pos
 import CommentList from "./CommentList"
 import PostVote from "./PostVote"
 import PostForm from "./PostForm"
-import { withRouter } from 'react-router-dom'
 import Swal from "sweetalert2"
 import NotFoundPage from "./NotFoundPage"
 
@@ -36,7 +35,7 @@ class PostPage extends Component {
     }
 
     render() {
-        const {post, editPost, error} = this.props
+        const {post, editPost} = this.props
         if(post.title !== undefined) {
             return (
                 <Container fluid={true}>
